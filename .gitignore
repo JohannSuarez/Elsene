@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# mp3 and video formats from testing
+*.mp3
+*.webm
+*.mp4
+*.mkv
