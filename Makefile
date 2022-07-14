@@ -1,4 +1,7 @@
 run:
 	uvicorn app.main:app --reload
 
-.PHONY: run
+clean:
+	rm *.mp3
+
+.PHONY: run clean
