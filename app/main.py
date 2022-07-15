@@ -1,10 +1,8 @@
-from fastapi import FastAPI, HTTPException
-from .sampackage.pack import sayHi
+from fastapi import FastAPI
 from .schemas.convert_request import ConversionRequest
 from .converter.ytdl import Converter
 from subprocess import TimeoutExpired
 
-import time
 
 app = FastAPI()
 
@@ -13,7 +11,7 @@ async def root():
     return {"message": "Hello world"}
 
 @app.post("/convert", status_code=200)
-async def mail(request: ConversionRequest):
+async def convert(request: ConversionRequest):
     """
     Steps:
         Verify schema with Pydantic

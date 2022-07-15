@@ -33,7 +33,5 @@ class Converter:
         # Return the process, so we can check stdout/stderr
         proc = subprocess.Popen(self.command, stdout=PIPE, stderr=PIPE)
         return proc
-        #subprocess.run(self.command)
-
 
 
