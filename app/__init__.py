@@ -1,4 +1,5 @@
-from threading import Lock, Thread
+from threading import Lock
+from typing import List
 
 
 class SingletonMeta(type):
@@ -34,7 +35,7 @@ class SingletonMeta(type):
 
 
 class ConversionQueue(metaclass=SingletonMeta):
-    queue: dict = {}
+    queue: List[List] = []
     """
     Keep a record of the conversion requests.
     """
@@ -44,5 +45,5 @@ class ConversionQueue(metaclass=SingletonMeta):
         """
         Add onto queue. This will be checked by
         """
-        cls.queue[request['recipient']] = (request['yt_url'], output_name_salt)
+        cls.queue.append([request, output_name_salt])
 
