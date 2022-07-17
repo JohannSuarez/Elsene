@@ -1,6 +1,8 @@
 from threading import Lock
 from typing import List
+from dotenv import dotenv_values
 
+import sys
 
 class SingletonMeta(type):
     """
@@ -33,6 +35,35 @@ class SingletonMeta(type):
                 cls._instances[cls] = instance
         return cls._instances[cls]
 
+class Configs(metaclass=SingletonMeta):
+    """
+    Configs that source private environment variables.
+    """
+    config = dotenv_values(".env")
+
+    try:
+        __email_address: str = config["EMAIL_ADDRESS"] or ""
+        __email_password: str = config["EMAIL_PASS"] or ""
+
+    except KeyError as error:
+        sys.stderr.write(f"Dotenv config error: {error} is missing\n")
+        sys.exit(1)
+
+    @classmethod
+    @property
+    def email_address(cls) -> str:
+        """
+        Getter for the e-mail address
+        """
+        return cls.__email_address
+
+    @classmethod
+    @property
+    def email_password(cls) -> str:
+        """
+        Getter for the e-mail password
+        """
+        return cls.__email_password
 
 class ConversionQueue(metaclass=SingletonMeta):
     queue: List[List] = []
@@ -46,4 +77,3 @@ class ConversionQueue(metaclass=SingletonMeta):
         Add onto queue. This will be checked by
         """
         cls.queue.append([request, output_name_salt])
-

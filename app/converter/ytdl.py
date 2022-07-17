@@ -3,6 +3,7 @@ import subprocess
 
 from typing import List
 from app import ConversionQueue
+from app import Configs
 from app.mailer.mailer import Mailer
 from subprocess import PIPE
 
@@ -35,7 +36,7 @@ class Converter:
         proc.wait()
 
         # Find the file, send it to the recipient.
-        mailer = Mailer()
+        mailer = Mailer(Configs.email_address, Configs.email_password)
 
         conversion_request: List = ConversionQueue.queue.pop(0)
         recipient_email = conversion_request[0]['recipient']

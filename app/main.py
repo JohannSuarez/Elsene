@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app import Configs
 from .routers import yt2mp3
 
 app = FastAPI()
