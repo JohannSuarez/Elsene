@@ -7,6 +7,8 @@ WORKDIR /app
 COPY ./requirements.txt /app
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # youtube-dl needs to be installed.
+RUN apt update
+RUN apt install -y ffmpeg
 RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 RUN chmod a+rx /usr/local/bin/youtube-dl
 
