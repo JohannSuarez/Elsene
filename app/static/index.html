@@ -10,11 +10,8 @@
 <body>
 
     <script>
-
     form_func = () => {
       const data = { 
-          //yt_url: 'https://www.youtube.com/watch?v=hG6YzmvbosI',
-          //recipient: 'johann.suarez92@gmail.com'
           yt_url: document.getElementById("input_yt_url").value,
           recipient: document.getElementById("input_recipient").value
       };
@@ -26,9 +23,11 @@
         },
         body: JSON.stringify(data),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Fetch Success:', data);
+        .then((response) => {
+          // Determine the appropriate css/html element value changes depending
+          // on the response code.
+          console.log(response)
+
         })
         .catch((error) => {
           console.error('Fetch Error:', error);
