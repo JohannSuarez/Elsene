@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Response, status
 from app import ConversionQueue
 from ..schemas.convert_request import ConversionRequest
 from ..converter.ytdl import Converter
@@ -10,7 +10,7 @@ import threading
 router = APIRouter()
 
 @router.post("/convert", status_code=200)
-async def convert(request: ConversionRequest):
+async def convert(request: ConversionRequest, response: Response):
     """
     Steps:
         Verify schema with Pydantic
@@ -41,4 +41,5 @@ async def convert(request: ConversionRequest):
 
         return {"message": "Conversion process started. Please check e-mail after 5 mins"}
 
+    response.status_code = 400
     return {"error": "Conversion failed"}
