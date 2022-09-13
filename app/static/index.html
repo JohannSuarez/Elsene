@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <title>Elsene</title>
+</head>
+<body>
+
+    <script>
+
+    form_func = () => {
+      const data = { 
+          //yt_url: 'https://www.youtube.com/watch?v=hG6YzmvbosI',
+          //recipient: 'johann.suarez92@gmail.com'
+          yt_url: document.getElementById("input_yt_url").value,
+          recipient: document.getElementById("input_recipient").value
+      };
+
+      fetch('http://0.0.0.0:8000/convert', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Fetch Success:', data);
+        })
+        .catch((error) => {
+          console.error('Fetch Error:', error);
+        });
+
+      }
+    </script>
+
+    <div class="elsene-form">
+      <form enctype='application/json' id="myForm" method="POST">
+        <label>YouTube URL</label>
+      <div class="elsene-form-yt-url">
+          <input name="yt_url" id="input_yt_url" placeholder="YouTube URL" autocomplete="off">
+      </div>
+
+      <label>Recipient</label>
+      <div class="elsene-form-recipient">
+          <input name="recipient" id="input_recipient" placeholder="Recipient E-Mail" autocomplete="off">
+      </div>
+          <button onclick="form_func()">Submit</button>
+      </form>
+    </div>
+    <script>
+      var form = document.getElementById("myForm");
+      function handleForm(event) { event.preventDefault(); } 
+      form.addEventListener('submit', handleForm);
+    </script>
+
+
+</body>
+</html>

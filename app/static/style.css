@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+body {
+  background-color: #2C2C2C;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.5em;
+}
+
+.elsene-form {
+  background-color: #D6D6D6;
+  border-radius: 16px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  width: 50%;
+  box-shadow: -6px -6px 6px rgb(255 255 255 / 10%), 6px 6px 6px rgb(0 0 0 / 10%);
+}
+
+input {
+  /* To hide default browser options of input field */
+  border: none;
+  outline: none;
+  /* Custom design for the input field */
+  background: none;
+  font-size: 18px;
+  color: #555;
+  padding: 15px 10px 15px 5px;
+}
+
+.elsene-form-yt-url, .elsene-form-recipient {
+  margin-bottom: 20px;
+  margin-right: 100px;
+  padding-left: 20px;
+  border-radius: 20px;
+  /* Box-shadow for 3d 
+  box-shadow: inset 5px 5px 5px #cbced1,
+    inset -5px -5px 5px #ffffff;
+  */
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.15),
+    inset -5px -5px 5px rgba(255, 255, 255, 0.4);
+}
+
+.elsene-form button {
+  cursor: pointer;
+  background-color: #4CAF50;
+  border-radius: 8px;
+  border: None;
+  color: white;
+  margin-top: 15px;
+  padding: 10px 25px;
+  box-shadow: 
+    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(50,133,52,0.92), rgba(76, 175, 80 ,0.85));
+}
