@@ -23,7 +23,6 @@ class Mailer:
         msg['Subject'] = 'Your Converted Video'
         msg['From'] = self.email_address
         msg['To'] = recipient
-
         msg.set_content("The .mp3 file is attached to this e-mail.")
 
         '''
@@ -37,7 +36,7 @@ class Mailer:
             content = content_file.read()
             msg.add_attachment(content, maintype='audio',
                                subtype='mpeg',
-                               filename=str(file))
+                               filename=str(file)[6:])
 
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(self.email_address, self.password)
