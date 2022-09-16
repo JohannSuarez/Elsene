@@ -11,6 +11,10 @@
 
     <script>
     form_func = () => {
+      var button = document.getElementById("submit-button");
+      var response_text = document.getElementById("request-response");
+
+
       const data = { 
           yt_url: document.getElementById("input_yt_url").value,
           recipient: document.getElementById("input_recipient").value
@@ -24,15 +28,25 @@
         body: JSON.stringify(data),
       })
         .then((response) => {
-          // Determine the appropriate css/html element value changes depending
-          // on the response code.
+
+          // Check if the response is 200 or not.
+          // Hide the button when the response is good. That means 
+          // a subprocess has been created and the conversion is underway.
           console.log(response)
 
+          if(response.status == 200) {
+
+            button.style.display = 'none';
+            response_text.classList.add("request-response-good");
+            response_text.innerText = "Submitted! Please check your e-mail after a few minutes.";
+
+          } else {
+            response_text.innerText = "Error: Issue with server or request.";
+          }
         })
         .catch((error) => {
           console.error('Fetch Error:', error);
         });
-
       }
     </script>
 
@@ -40,15 +54,15 @@
       <form enctype='application/json' id="myForm" method="POST">
         <label>YouTube URL</label>
       <div class="elsene-form-yt-url">
-          <input name="yt_url" id="input_yt_url" placeholder="YouTube URL" autocomplete="off">
+          <input name="yt_url" id="input_yt_url" class="input-dimensions" placeholder="YouTube URL" autocomplete="off">
       </div>
 
       <label>Recipient</label>
       <div class="elsene-form-recipient">
-          <input name="recipient" id="input_recipient" placeholder="Recipient E-Mail" autocomplete="off">
+          <input name="recipient" id="input_recipient" class="input-dimensions" placeholder="Recipient E-Mail" autocomplete="off">
       </div>
-      <div class="request-response"><font size=4px></font></div>
-      <button onclick="form_func()">Submit</button>
+      <div class="request-response"><p id="request-response" size=4px></p></div>
+      <button id="submit-button" onclick="form_func()">Submit</button>
       </form>
     </div>
     <script>
