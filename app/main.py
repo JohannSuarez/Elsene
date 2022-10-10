@@ -33,3 +33,8 @@ async def root(request: Request):
             "index.html",
             {"request": request}
     )
+
+@app.get("/mason")
+async def mason():
+    return {"message": "GOOD JOB MASON!"}
+

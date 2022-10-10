@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}" >
-    <title>Elsene</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+  <title>Elsene</title>
 </head>
+
 <body>
 
-    <script>
+  <script>
     form_func = () => {
       var button = document.getElementById("submit-button");
       var response_text = document.getElementById("request-response");
 
 
-      const data = { 
-          yt_url: document.getElementById("input_yt_url").value,
-          recipient: document.getElementById("input_recipient").value
+      const data = {
+        yt_url: document.getElementById("input_yt_url").value,
+        recipient: document.getElementById("input_recipient").value
       };
 
-      fetch('http://0.0.0.0:8000/convert', {
+      fetch('https://johanns.xyz/elsene/convert', {
         method: 'POST', // or 'PUT'
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +36,7 @@
           // a subprocess has been created and the conversion is underway.
           console.log(response)
 
-          if(response.status == 200) {
+          if (response.status == 200) {
 
             button.style.display = 'none';
             response_text.classList.add("request-response-good");
@@ -47,30 +49,34 @@
         .catch((error) => {
           console.error('Fetch Error:', error);
         });
-      }
-    </script>
+    }
+  </script>
 
-    <div class="elsene-form">
-      <form enctype='application/json' id="myForm" method="POST">
-        <label>YouTube URL</label>
+  <div class="elsene-form">
+    <form enctype='application/json' id="myForm" method="POST">
+      <label>YouTube URL</label>
       <div class="elsene-form-yt-url">
-          <input name="yt_url" id="input_yt_url" class="input-dimensions" placeholder="YouTube URL" autocomplete="off">
+        <input name="yt_url" id="input_yt_url" class="input-dimensions" placeholder="YouTube URL" autocomplete="off">
       </div>
 
       <label>Recipient</label>
       <div class="elsene-form-recipient">
-          <input name="recipient" id="input_recipient" class="input-dimensions" placeholder="Recipient E-Mail" autocomplete="off">
+        <input name="recipient" id="input_recipient" class="input-dimensions" placeholder="Recipient E-Mail"
+          autocomplete="off">
       </div>
-      <div class="request-response"><p id="request-response" size=4px></p></div>
+      <div class="request-response">
+        <p id="request-response" size=4px></p>
+      </div>
       <button id="submit-button" onclick="form_func()">Submit</button>
-      </form>
-    </div>
-    <script>
-      var form = document.getElementById("myForm");
-      function handleForm(event) { event.preventDefault(); } 
-      form.addEventListener('submit', handleForm);
-    </script>
+    </form>
+  </div>
+  <script>
+    var form = document.getElementById("myForm");
+    function handleForm(event) {event.preventDefault();}
+    form.addEventListener('submit', handleForm);
+  </script>
 
 
 </body>
+
 </html>
