@@ -2,12 +2,12 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse
 from pathlib import Path
-from app import Configs
 from .routers import yt2mp3
 
-
 app = FastAPI()
+favicon_path = 'app/favicon.ico'
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,6 +33,10 @@ async def root(request: Request):
             "index.html",
             {"request": request}
     )
+
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(favicon_path)
 
 @app.get("/mason")
 async def mason():

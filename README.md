@@ -27,5 +27,19 @@ From the root of the repo,
 run this command to build the docker image.
 
 ```
-docker build -t ytmp3 .
+docker build -t yt2mp3 .
 ```
+
+By default, the app will run on port 9000. 
+Create a container instance of the image.
+Here is an example command mapping the container's port 9000
+to the host's port 80.
+
+```
+docker run -p 80:9000 yt2mp3:latest
+```
+
+Add the argument "-d" to run the container in the background.
+
+
+
