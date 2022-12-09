@@ -2,7 +2,6 @@ form_func = () => {
   var button = document.getElementById("submit-button");
   var response_text = document.getElementById("request-response");
 
-
   const data = {
     yt_url: document.getElementById("input_yt_url").value,
     recipient: document.getElementById("input_recipient").value
