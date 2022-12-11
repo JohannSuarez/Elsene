@@ -7,7 +7,9 @@ form_func = () => {
     recipient: document.getElementById("input_recipient").value
   };
 
-  fetch('/convert', {
+	// December 10, 2022: For some reason this won't work live unless you prefix it with /elsene
+	// I must fix this, but I don't know how.
+  fetch('/elsene/convert', {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
