@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Response, status
+from fastapi import APIRouter, Response
 from app import ConversionQueue
 from ..schemas.convert_request import ConversionRequest
 from ..converter.ytdl import Converter
