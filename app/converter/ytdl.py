@@ -64,5 +64,8 @@ class Converter:
 
         # Return the process, so we can check stdout/stderr
         proc = subprocess.Popen(self.command, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = proc.communicate()
+        print(stdout.decode())
+        print(stderr.decode())
 
         return proc
