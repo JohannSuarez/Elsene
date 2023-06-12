@@ -1,13 +1,33 @@
-from fastapi import APIRouter, Response
+import asyncio
+import time
+from fastapi import APIRouter, Response, WebSocket
 from app import ConversionQueue
 from ..schemas.convert_request import ConversionRequest
 from ..converter.ytdl import Converter
 from ..utils.random_string_generator import generate
-from subprocess import TimeoutExpired
+from subprocess import Popen, TimeoutExpired, PIPE, STDOUT
 
 import threading
 
 router = APIRouter()
+
+@router.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    # assuming the bash script outputs progress as percentage
+    subprocess = Popen(['bash', 'split_and_zip.sh'], stdout=PIPE, stderr=STDOUT)
+    while subprocess.poll() is None:
+        output = subprocess.stdout.readline() # type: ignore
+        if output == '':
+            break
+        if output:
+            progress = output.strip().decode('utf-8')
+            await websocket.send_json({"progress": progress})
+            print("Sent!")
+            await asyncio.sleep(1) # non-blocking delay
+        
+    # send final progress update
+    await websocket.send_json({"progress": 100})
 
 @router.post("/convert", status_code=200)
 async def convert(request: ConversionRequest, response: Response):
